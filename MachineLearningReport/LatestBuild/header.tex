@@ -1,0 +1,428 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                      %
+%         Univesity College London Project LaTex Template            %
+%                                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Author: Alex Charles           Email: aep.charles@gmail.com
+%
+% -----------------------------------------------------------------------------------
+%      PACKAGES & OTHER DOCUMENT CONFIGURATIONS
+% -----------------------------------------------------------------------------------
+\documentclass[fontsize=11pt]{extarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+% ----------NEW BIBLATEX BIBLIOGRAPHY-----------------------------------------------
+\usepackage[eprint=false,backend=bibtex,style = ieee]{biblatex} % Upgrades Bibliography Block Ragged helps break lines in url fixes error
+
+\addbibresource{../BibFile.bib} %%% For biblatex
+%e.g to add page number \footfullcite[chapter, p.~215]{AAIB}
+% of \footnote{Footnote text goes here}
+% This allows can use footfullcite commands
+% Note urldate field must be in yyyy-mm-dd to work - use online type
+% Remeber to use \printbibliography in the footer
+% -----------------------------------------------------------------------------------
+% \usepackage{sectsty}
+\usepackage{url}
+
+%%% --- The following two lines are what needs to be added --- %%%
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+\usepackage{amssymb,amsmath}
+\numberwithin{figure}{section} %%%%% <<<<<< Puts Figure Numbering into Sections
+\numberwithin{table}{section}%%%%% <<<<<< Puts Tables Numbering into Sections
+\usepackage{ifxetex,ifluatex}  %<<<<<<<<< Edit FONT HERE
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \setmainfont[
+ BoldFont={AvenirNext-Medium},ItalicFont={AvenirNext-Italic},
+ BoldItalicFont={AvenirNext-MediumItalic}]{AvenirNext-Regular}
+  \else
+  % Font Package for XeLatex
+    \usepackage{fontspec}
+    \setmainfont{AvenirNext-Regular}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+\usepackage[fit]{truncate} %Truncates headers that are too long
+\usepackage[headheight=26pt,headsep=0.15cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{gensymb}
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{../TempImg/}{../Img/}}%<<<<<<<<< Location of Template Images and Other Images, Add folders here
+\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage[font ={small,it}]{caption}
+\usepackage{amsfonts,amsthm} % Math packages
+% \usepackage{cite}
+\usepackage{csquotes}
+%    \MakeAutoQuote{‘}{’}
+%    \MakeAutoQuote*{“}{”} %corrects quote marks
+\usepackage{enumitem} % resume numbered lists
+\usepackage{multicol} %for mulitple colums in lists
+\usepackage{booktabs} %<<<<<<<<< Table drawing package
+\usepackage[table,xcdraw]{xcolor} %<<<<<<<<< Table drawing package
+\usepackage{svg}
+\usepackage{scrextend} %call footnotes
+\usepackage[colorlinks, linkcolor = black, citecolor = black, filecolor = black, urlcolor = blue]{hyperref} % Creates Hyperlinks for references - add [colorlinks] for coloured hyperlinks
+\usepackage{changepage} %Allows Adjust width to be used for the document (indenting paragraphs)
+\usepackage{pdfpages} %Allows Pdfpages to be added to the document use \includepdf[pages={1}]{myfile.pdf}
+\usepackage{pdflscape} %Change Pages from Portrait to Landscape
+\usepackage{color,soul} %% Highlights text for markup
+% \usepackage[compact]{titlesec}
+
+\usepackage{pdfpages} %Allows Pdfpages to be added to the document use \includepdf[pages={1}]{myfile.pdf}
+%%%%%%%For Condensed Report Format%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\titlespacing\section{0pt}{6pt plus 2pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{0pt plus 3pt minus 2pt}{-3pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{0pt plus 2pt minus 2pt}{-6pt plus 2pt minus 2pt}
+\titlespacing\subsubsubsection{0pt}{-6pt plus 2pt minus 2pt}{-6pt plus 2pt minus 2pt}
+\setlength{\multicolsep}{-1pt plus 2.0pt minus 1.5pt}% 50% of original values
+
+% \titlespacing*{\section}{0pt}{1.1\baselineskip}{\baselineskip}
+
+\renewcommand*{\thefootnote}{\alph{footnote}} %%% Changes footnotes to letters
+\usepackage[bottom]{footmisc} %%% Pushes footnote to bottom and to the margin
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+{\usebibmacro{cite:init}%
+\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+\printtext[brackets]{\usebibmacro{cite:comp}}}
+{\multicitedelim}
+{\usebibmacro{cite:dump}%
+\usebibmacro{postnote}}
+
+\newenvironment{indentpara}{\begin{adjustwidth}{2cm}{}}{\end{adjustwidth}} %Declare adjust width wiht indentpara
+\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemiii}{$\diamond$}
+\renewcommand{\labelitemiii}{$\cdot$}
+
+% -----------------------------------------------------------------------------------
+%                 Code
+% -----------------------------------------------------------------------------------
+\usepackage{listings}
+\lstset{inputpath=Code/}
+\usepackage{color}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    basicstyle=\small,
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},
+}
+
+%% To Add Code Use :
+% \lstinputlisting{myfun.m}
+%% To input a file or :
+% \begin{figure}[h]
+% \begin{lstlisting}[language=Matlab]
+% \end{lstlisting}
+% \catpion{code}
+% \end{figure}
+
+
+% -----------------------------------------------------------------------------------
+%                 Quotes
+% -----------------------------------------------------------------------------------
+
+\usepackage{epigraph}
+% \epigraphsize{\small}% Default
+\setlength\epigraphwidth{12cm}
+\setlength\epigraphrule{0pt}
+
+\usepackage{etoolbox}
+\apptocmd{\sloppy}{\hbadness 10000\relax}{}{}%%%% > Removes Url bibliography warnings
+\makeatletter
+\patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
+\makeatother
+
+%%%% > For Quotes Use \epigraph{"Quote"}{ - \textup{Author}, Book}
+
+% -----------------------------------------------------------------------------------
+%                   NAMES & CLASS DEFINITION %<<<<<<<<< INSERT DETAILS HERE
+% -----------------------------------------------------------------------------------
+\newcommand{\AssignmentTitle}{Machine Learning - Regression Analysis}
+\newcommand{\ModuleTitle}{instg083/instm083 - Foundations of Machine Learning and Data Science}
+\newcommand{\DegreeTitle}{MSc Computer Science}
+\newcommand{\University}{University College London}
+\newcommand{\Faculty}{Faculty of Engineering Sciences}
+\newcommand{\UniCrest}{logoucl.png}
+\newcommand{\UniLogo}{logoucl.png}%<<<<<<<<< Make Sure Files are in the Template
+\newcommand{\GroupName}{group c6}
+\newcommand{\StudentNameA}{Alexander Charles}
+\newcommand{\StudentNumberA}{alexander.charles.17@ucl.ac.uk}
+\newcommand{\StudentNameC}{Jan Wadolowski}
+\newcommand{\StudentNumberC}{jan.wadolowski.17@ucl.ac.uk}
+\newcommand{\StudentNameB}{Jake Connolly}
+\newcommand{\StudentNumberB}{jake.connolly.13@ucl.ac.uk}
+\newcommand{\SupervisorNameA}{Luke Dickens}
+\newcommand{\SupervisorEmailA}{l.dickens@ucl.ac.uk}
+
+
+% -----------------------------------------------------------------------------------
+%        PACKAGES FOR MARKDOWN CONVERSION - FOR USE If Using Markdown to Latex
+% -----------------------------------------------------------------------------------
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\hypersetup{unicode=true,
+            pdftitle={\AssignmentTitle},
+            pdfauthor={\StudentNameA},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{fancyvrb}
+\VerbatimFootnotes % allows verbatim text in footnotes
+\usepackage{longtable,booktabs}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}s
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% \setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% -----------------------------------------------------------------------------------
+%                   WORD COUTNER - for XeLaTex
+% -----------------------------------------------------------------------------------
+% \usepackage{xesearch}
+% \newcounter{words}
+% \newenvironment{counted}{%
+%   \setcounter{words}{0}
+%   \SearchList!{wordcount}{\stepcounter{words}}
+%     {a?,b?,c?,d?,e?,f?,g?,h?,i?,j?,k?,l?,m?,
+%     n?,o?,p?,q?,r?,s?,t?,u?,v?,w?,x?,y?,z?}
+%   \UndoBoundary{'}
+%   \SearchOrder{p;}}{%
+%   \StopSearching}
+
+% -----------------------------------------------------------------------------------
+%                   MARGINS, HEADERS & FOOTERS
+% -----------------------------------------------------------------------------------
+ \geometry{
+ left=18.4mm,
+ right=20.4mm,
+ top=25.4mm,
+ bottom=25.4mm,
+ }
+\linespread{1.15}
+
+\pagestyle{fancy}
+\lhead{\includegraphics[width = 0.15\textwidth]{\UniLogo}}
+% \chead{\AssignmentTitle}
+% \rhead{}
+\lfoot{\StudentNameA, \StudentNameB, \StudentNameC}
+\cfoot{}
+\rfoot{Page \thepage} %%%% note the footer is swapped when page numbering style changes
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+ % \setlength{\headheight}{5mm}
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+
+% -----------------------------------------------------------------------------------
+%               DOCUMENT STRUCTURE COMMANDS
+% -----------------------------------------------------------------------------------
+% To sort out the formatting of header and footer when a page...
+% ... split occurs "within" a problem environment.
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1 (Cont.)}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+% To sort out the formatting of header and footer when a page...
+% ... split occur "between" problem environments.
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (Cont.)}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+% -----------------------------------------------------------------------------------
+\begin{document}
+
+
+%For PDF intro
+% \includepdf[pages={-}]{DP4front.pdf}
+
+  \setlength{\abovedisplayskip}{-18pt}
+  \setlength{\belowdisplayskip}{0pt}
+  \setlength{\abovedisplayshortskip}{-18pt}
+  \setlength{\belowdisplayshortskip}{0pt}
+
+  \setlist[enumerate]{itemsep=-2mm}
+  \setlist[itemize]{itemsep=-2mm}
+
+
+%----------------------------------------------------------------------------------------
+                                  %	TITLE PAGE FORMAT
+%----------------------------------------------------------------------------------------
+\pagenumbering{roman}
+\begin{titlepage}
+
+	\center % Center everything on the page
+%----------------------------------------------------------------------------------------
+%	HEADING SECTION
+%----------------------------------------------------------------------------------------
+		\usefont{OT1}{bch}{b}{n}
+		\normalfont \normalsize \textsc{\University} \\ [10pt]
+		\normalfont \normalsize \textsc{\Faculty} \\ [25pt]
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION - Adds Univeristy Crest to the Report
+%----------------------------------------------------------------------------------------
+		\includegraphics[width = 0.6\textwidth]{\UniCrest}\\[0.5cm]
+%----------------------------------------------------------------------------------------
+%	HEADING SECTION
+%----------------------------------------------------------------------------------------
+		\normalfont \normalsize \textsc{\ModuleTitle} \\ [10pt]
+    \normalfont \normalsize \textsc{\DegreeTitle} \\ [25pt]
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+		\horrule{0.5pt} \\[0.4cm]
+		\huge \textbf{\AssignmentTitle} \\
+		\horrule{2pt} \\[0.5cm]
+%----------------------------------------------------------------------------------------
+%	HEADING SECTION
+%----------------------------------------------------------------------------------------
+\normalfont \normalsize \textsc{\GroupName} \\ [25pt]
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+\begin{minipage}{0.4\textwidth}
+  \begin{flushleft} \large
+  \emph{Supervisors:}\\
+  % Change Name
+  \textbf{\SupervisorNameA}\\
+  % \textbf{\SupervisorNameB}
+  \end{flushleft}
+\end{minipage}\qquad
+\begin{minipage}{0.4\textwidth}
+  \begin{flushright} \large
+  \emph{Email:} \\
+  \SupervisorEmailA \\
+  % \SupervisorEmailB
+  \end{flushright}
+\end{minipage} \\[1cm]
+\begin{minipage}{0.4\textwidth}
+  \begin{flushleft} \large
+  \emph{Authors:} \\
+  	\textbf{\StudentNameA} \\
+    \textbf{\StudentNameB} \\
+    \textbf{\StudentNameC}
+  \end{flushleft}
+\end{minipage}\qquad
+\begin{minipage}{0.4\textwidth}
+  \begin{flushright} \large
+     \emph{Authors Email:} \\
+     (\StudentNumberA) \\
+    (\StudentNumberB) \\
+    (\StudentNumberC)
+    \end{flushright}
+\end{minipage}\\[0.6cm]
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+\textit{{\large \today}}\\% Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	Disclaimer
+%----------------------------------------------------------------------------------------
+{\footnotesize This report is submitted as part requirement for the MSc Computer Science degree at UCL. It is substantially the result of my own work except where explicitly indicated in the text. The report may be freely copied and distributed provided the source is explicitly acknowledged.}
+
+% ---------------------------------
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+
+% \setcounter{page}{3}
+
+\newpage
+
+
+% -----------------------------------------------------------------------------------
+%                             	 ABSTRACT
+% -----------------------------------------------------------------------------------
+
+% \addcontentsline{toc}{section}{Abstract}
+% \begin{abstract}
+%   Abstract text
+% \end{abstract}
+% \newpage
+
+% \addcontentsline{toc}{section}{Acknowledgements}
+% \section*{Acknowledgements}\label{acknowledgements}
+% Acknowledgments text
+% \newpage
+% -----------------------------------------------------------------------------------
+%                              TABLE OF CONTENTS
+% -----------------------------------------------------------------------------------
+
+\tableofcontents
+%
+%
+\newpage
+
+% \addcontentsline{toc}{section}{List of Tables}
+% \listoftables
+% \addcontentsline{toc}{section}{List of Figures}
+% \listoffigures
+%
+% \newpage
+
+% \addcontentsline{toc}{section}{List of Acronyms}
+% \section*{List of Acronyms}\label{acronyms}
+% \textbf{CS}: Computer Science \\
+% \textbf{UCL}: Univeristy College London \\
+
+% \newpage
+
+%% -----------------------------------------------------------------------------------
+%%                          	  INTRODUCTION
+%% -----------------------------------------------------------------------------------
+\clearpage
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+\pagenumbering{arabic}
+% \begin{counted} %<<<<<<<<<<<<<<STARTS WORD COUNTER
